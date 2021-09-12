@@ -40,17 +40,18 @@ function canGenPoints(){
 // Calculate points/sec!
 function getPointGen() {
 	if(!canGenPoints()) return new ExpantaNum(0)
-	let gain = new ExpantaNum(1)
-	if (hasUpgrade('航天', 13)) gain = gain.times(upgradeEffect('航天', 13))
-	if (hasUpgrade('燃料', 12)) gain = gain.times(upgradeEffect('燃料', 12))
-	if (hasUpgrade('燃料', 14)) gain = gain.times(upgradeEffect('燃料', 14))
-	if (inChallenge('燃料', 11)) gain = gain.div(2)
-	if (hasChallenge('燃料', 11)) gain = gain.times(challengeEffect('燃料', 11))
-	if (hasUpgrade('航天', 11)) gain = gain.times(5)
-	if (inChallenge('航天', 11)) gain = gain.div(5)
-	if (hasChallenge('航天',12)) mult = mult.add(1).pow(buyableEffect('勘探',22))
-	if (inChallenge('航天',13)) gain = gain.div(1000)
-	return gain
+	let eff = new ExpantaNum(1)
+	if (hasUpgrade('航天', 13)) eff = eff.times(upgradeEffect('航天', 13))
+	if (hasUpgrade('燃料', 12)) eff = eff.times(upgradeEffect('燃料', 12))
+	if (hasUpgrade('燃料', 14)) eff = eff.times(upgradeEffect('燃料', 14))
+	if (inChallenge('燃料', 11)) eff = eff.div(2)
+	if (hasChallenge('燃料', 11)) eff = eff.times(challengeEffect('燃料', 11))
+	if (hasUpgrade('航天', 11)) eff = eff.times(5)
+	if (inChallenge('航天', 11)) eff = eff.div(5)
+	if (hasChallenge('航天',12)) eff = eff.add(1).pow(buyableEffect('勘探',22))
+	if (inChallenge('航天',13)) eff = eff.div(1000)
+	eff = softcap(eff,new ExpantaNum(1e10),0.1)
+	return eff
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values
