@@ -34,7 +34,8 @@ addLayer("燃料", {
             goalDescription:"获得600燃料点",
             rewardDescription:"借助备用油井，增加根据燃料点大幅增加燃料点获取。",
             rewardEffect(){
-                return player.points.add(1).mul(0.55).pow(0.477)
+                var baseEff = player.points.add(1).mul(0.55).pow(0.477)
+                return baseEff
             },
             canComplete: function() {return player.points.gte(600)},
             unlocked(){return hasUpgrade("燃料",13)},
@@ -51,6 +52,7 @@ addLayer("燃料", {
                 if(inChallenge('航天',11)) baseEff = baseEff.div(baseEff)
                 if(inChallenge('航天',13)) baseEff = baseEff.add(player.points.add(1).pow(250)).pow(1)
                 if(hasChallenge('航天',13)) baseEff = baseEff.add(player.points.add(1).pow(0.25)).pow(1)
+                baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                 return baseEff
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
@@ -66,6 +68,7 @@ addLayer("燃料", {
             if(inChallenge('航天',11)) baseEff = baseEff.div(baseEff)
             if(inChallenge('航天',13)) baseEff = baseEff.add(player.points.add(1).pow(250)).pow(1)
             if(hasChallenge('航天',13)) baseEff = baseEff.add(player.points.add(1).pow(0.25)).pow(1)
+            baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
             return baseEff
         },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
@@ -84,6 +87,7 @@ addLayer("燃料", {
             if(hasUpgrade("航天",15)) baseEff = baseEff.mul(challengeEffect("燃料",11))
             if(inChallenge('航天',13)) baseEff = baseEff.add(player.points.add(1),pow(250)).pow(1)
             if(hasChallenge('航天',13)) baseEff = baseEff.add(player.points.add(1).pow(0.25)).pow(1)
+            baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
             return baseEff
             },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
@@ -98,6 +102,7 @@ addLayer("燃料", {
             if(inChallenge('航天',11)) baseEff = baseEff.div(baseEff)
             if(inChallenge('航天',13)) baseEff = baseEff.add(player.points.add(1),pow(250)).pow(1)
             if(hasChallenge('航天',13)) baseEff = baseEff.add(player.points.add(1).pow(0.25)).pow(1)
+            baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
             return baseEff
                 },
         effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect

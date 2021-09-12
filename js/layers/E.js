@@ -17,7 +17,7 @@ addLayer("勘探", {
 
     requires: new ExpantaNum(10000000000000),              // 获取第一个这一 layer 声望点所需资源数量
                                             // 同样是解锁这一 layer 所需的资源数量
-
+    branches:["燃料"],
     type: "normal",                         // 定义这一 layer 声望点获取公式
     exponent: 0.5,                          // "normal" 获取到的是 (currency^exponent)
 
@@ -40,6 +40,7 @@ addLayer("勘探", {
             effect(){
                var baseEff = getBuyableAmount(this.layer,this.id) .add(1).pow(0.1)
                if(hasChallenge('航天',12)) baseEff = baseEff.mul(buyableEffect('勘探',41))
+               baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                return baseEff
             },
             display() { return "你有",getBuyableAmount(this.layer,this.id) ,"块金，每块金能激励燃料工人多造10%可用燃料"},
@@ -55,6 +56,7 @@ addLayer("勘探", {
             effect(){
                var baseEff = getBuyableAmount(this.layer,this.id) .add(1).pow(0.1)
                if(hasChallenge('航天',12)) baseEff = baseEff.mul(buyableEffect('勘探',42))
+               baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                return baseEff
             },
             display() { return "你有",getBuyableAmount(this.layer,this.id) ,"块铂，每块铂能激励航天器工人多造10%航天器"},
@@ -70,6 +72,7 @@ addLayer("勘探", {
             effect(){
                var baseEff = getBuyableAmount(this.layer,this.id) .add(1).pow(0.05)
                if(hasChallenge('航天',12)) baseEff = baseEff.add(1).pow(buyableEffect('勘探',41))
+               baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                return baseEff
             },
             display() { return "你有",getBuyableAmount(this.layer,this.id) ,"块钼，每块钼能让小行星捕获装置更高效5%"},
@@ -85,6 +88,7 @@ addLayer("勘探", {
             effect(){
                var baseEff = getBuyableAmount(this.layer,this.id) .add(1).pow(0.05)
                if(hasChallenge('航天',12)) baseEff = baseEff.add(1).pow(buyableEffect('勘探',42))
+               baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                return baseEff
             },
             display() { return "你有",getBuyableAmount(this.layer,this.id) ,"瓶氙，每瓶氙能让燃料点工厂更高效5%"},
@@ -100,6 +104,7 @@ addLayer("勘探", {
             effect(){
                var baseEff = getBuyableAmount(this.layer,this.id) .add(1).pow(0.2)
                if(hasChallenge('航天',12)) baseEff = baseEff.add(1).pow(buyableEffect('勘探',41))
+               baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                return baseEff
             },
             display() { return "你有",getBuyableAmount(this.layer,this.id) ,"块铱，每块铱能让卫星更强20%"},
@@ -115,6 +120,7 @@ addLayer("勘探", {
             effect(){
                var baseEff = getBuyableAmount(this.layer,this.id) .add(1).pow(0.2)
                if(hasChallenge('航天',12)) baseEff = baseEff.add(1).pow(buyableEffect('勘探',42))
+               baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                return baseEff
             },
             display() { return "你有",getBuyableAmount(this.layer,this.id) ,"块锇，每块锇能让航天升级12更强20%"},
@@ -129,6 +135,7 @@ addLayer("勘探", {
             cost(x) { return new ExpantaNum(64).mul(1) },
             effect(){
                var baseEff = getBuyableAmount(this.layer,this.id) .add(1).pow(0.4)
+               baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                return baseEff
             },
             display() { return "你有",getBuyableAmount(this.layer,this.id) ,"块镭，每块镭能增强铱，金，钼40%"},
@@ -143,6 +150,7 @@ addLayer("勘探", {
             cost(x) { return new ExpantaNum(64).mul(1) },
             effect(){
                var baseEff = getBuyableAmount(this.layer,this.id) .add(1).pow(0.4)
+               baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                return baseEff
             },
             display() { return "你有",getBuyableAmount(this.layer,this.id) ,"块钋，每块钋能增强氙，铂，锇40%"},

@@ -45,6 +45,7 @@ addLayer("航天", {
             rewardEffect(){
                 var baseEff=player.points.add(1).pow(0.7)
                 if(hasUpgrade("航天",14)) baseEff = baseEff.mul(challengeEffect('燃料',11))
+                baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                 return baseEff
             },
             canComplete: function() {return player.燃料.points.gte(20)},
@@ -83,6 +84,7 @@ addLayer("航天", {
                 if(hasChallenge("航天",12))baseEff = baseEff.mul(upgradeEffect("燃料",15))
                 if(hasChallenge('航天',12)) baseEff = baseEff.add(1).pow(buyableEffect('勘探',32))
                 if(inChallenge("航天",12)) baseEff = baseEff.div(baseEff)
+                baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                 return baseEff
                 },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
@@ -95,6 +97,7 @@ addLayer("航天", {
                 var baseEff = player[this.layer].pointss.add(1).pow(0.3)
                 if(inChallenge("航天",12)) baseEff = baseEff.div(baseEff)
                 if(hasChallenge('航天',12)) baseEff = baseEff.add(1).pow(buyableEffect('勘探',31))
+                baseEff = softcap(baseEff,new ExpantaNum(1e10),0.1)
                 return baseEff
                 },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, 
