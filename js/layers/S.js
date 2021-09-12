@@ -56,7 +56,7 @@ addLayer("航天", {
            goalDescription:"获得327670可用燃料",
            rewardDescription:"很幸运地，垃圾被及时清除，航天升级12的效果开始被燃料升级15增幅。同时解锁勘探并让矿石生效",
            canComplete: function() {return player.燃料.points.gte(327670)},
-           unlocked(){return hasUpgrade("航天",14)} 
+           unlocked(){return hasUpgrade("航天",21)} 
         },
         13:{
             name: "贫瘠之地",
